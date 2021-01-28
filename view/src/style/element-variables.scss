@@ -1,0 +1,57 @@
+/* theme color */
+// $--color-primary: #1890ff;
+$--color-primary: #5291FF;
+$--color-success: #13ce66;
+$--color-warning: #ffba00;
+$--color-danger: #ff4949;
+// $--color-info: #1E1E1E;
+
+$--button-font-weight: 400;
+
+// $--color-text-regular: #1f2d3d;
+
+$--border-color-light: #dfe4ed;
+$--border-color-lighter: #e6ebf5;
+
+$--table-border: 1px solid#dfe6ec;
+
+/* icon font path, required */
+$--font-path: '~element-plus/lib/theme-chalk/fonts';
+
+// 引入后 包会很大
+// 全局引入
+// @import "~element-plus/packages/theme-chalk/src/index";
+
+// 按需引入  部分scss文件没有用到对应的变量可以不引用
+//@import "~element-plus/packages/theme-chalk/src/button";
+//@import "~element-plus/packages/theme-chalk/src/col";
+//@import "~element-plus/packages/theme-chalk/src/collapse-transition";
+//@import "~element-plus/packages/theme-chalk/src/date-picker";
+//@import "~element-plus/packages/theme-chalk/src/dialog";
+//@import "~element-plus/packages/theme-chalk/src/drawer";
+//@import "~element-plus/packages/theme-chalk/src/dropdown";
+//@import "~element-plus/packages/theme-chalk/src/dropdown-menu";
+//@import "~element-plus/packages/theme-chalk/src/dropdown-item";
+//@import "~element-plus/packages/theme-chalk/src/form";
+//@import "~element-plus/packages/theme-chalk/src/form-item";
+//@import "~element-plus/packages/theme-chalk/src/icon";
+//@import "~element-plus/packages/theme-chalk/src/image";
+//@import "~element-plus/packages/theme-chalk/src/input";
+//@import "~element-plus/packages/theme-chalk/src/option";
+//@import "~element-plus/packages/theme-chalk/src/pagination";
+//@import "~element-plus/packages/theme-chalk/src/popconfirm";
+//@import "~element-plus/packages/theme-chalk/src/row";
+//@import "~element-plus/packages/theme-chalk/src/scrollbar";
+//@import "~element-plus/packages/theme-chalk/src/select";
+//@import "~element-plus/packages/theme-chalk/src/switch";
+//@import "~element-plus/packages/theme-chalk/src/tab-pane";
+//@import "~element-plus/packages/theme-chalk/src/table";
+//@import "~element-plus/packages/theme-chalk/src/table-column";
+//@import "~element-plus/packages/theme-chalk/src/tabs";
+//@import "~element-plus/packages/theme-chalk/src/tag";
+//@import "~element-plus/packages/theme-chalk/src/time-select";
+//@import "~element-plus/packages/theme-chalk/src/tooltip";
+//@import "~element-plus/packages/theme-chalk/src/transfer";
+//@import "~element-plus/packages/theme-chalk/src/infinite-scroll";
+//@import "~element-plus/packages/theme-chalk/src/loading";
+//@import "~element-plus/packages/theme-chalk/src/message";
