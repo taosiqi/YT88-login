@@ -23,21 +23,21 @@ axios.interceptors.request.use(
 //响应拦截器
 axios.interceptors.response.use(
   (res: AxiosResponse) => {
-    if (res.status !== 200) {
-      ElMessage.error('请求错误')
-    } else {
-      switch (res.data.code) {
-        case 401:
-          ElMessage.error(res.data.msg)
-          return Promise.reject(res.data.msg)
-        case 400:
-          ElMessage.error(res.data.msg)
-          return Promise.reject(res.data.msg)
-        case 402:
-          return Promise.reject(res.data.msg)
-      }
-    }
-    return Promise.resolve(res.data)
+    // if (res.status !== 200) {
+    //   ElMessage.error('请求错误')
+    // } else {
+    //   switch (res.data.code) {
+    //     case 401:
+    //       ElMessage.error(res.data.msg)
+    //       return Promise.reject(res.data.msg)
+    //     case 400:
+    //       ElMessage.error(res.data.msg)
+    //       return Promise.reject(res.data.msg)
+    //     case 402:
+    //       return Promise.reject(res.data.msg)
+    //   }
+    // }
+    return Promise.resolve(res)
   },
   error => {
     return Promise.reject(error)

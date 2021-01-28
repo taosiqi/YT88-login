@@ -1,13 +1,21 @@
-const express = require("express");
-const router = express.Router();
+var express = require("express");
+var router = express.Router();
 const SoftKey = require("../tool/SoftKey");
-const utils = require("../tool/utils");
 
-router.get("/get", function(req, res, next) {
-  const myriad = utils.GetRandomNum(1, 65535) + utils.GetRandomNum(1, 65535); //赋值随机数，以实现一次一密
-  const Key = "A46A6B5148DF374B19384DFCAEA44E21";
+router.get("/login", function(req, res, next) {
+  const myriad = "13212332423";
+  res.send({
+    myriad: myriad
+  });
+});
+router.get("/login/verify", function(req, res, next) {
+  const keyId = "e67e5dc74cfbb3fb"; //ukey设备id
+  const Key = "A46A6B5148DF374B19384DFCAEA44E21"; //增强密钥1
+  const myriad = "13212332423";
   const mSoftKey = new SoftKey(); //创建增强算法类
-  const m_StrEnc = mSoftKey.StrEnc("123456789123", Key);
-  res.send(myriad);
+  const m_StrEnc = mSoftKey.StrEnc(myriad, Key).toUpperCase();
+  res.send({
+    msg: req.query.KeyID == keyId && req.query.returnEncData == m_StrEnc
+  });
 });
 module.exports = router;

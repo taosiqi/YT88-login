@@ -1,19 +1,38 @@
 <template>
-  <div class="home">{{ msg }}</div>
+  <div class="main">
+    <el-button type="primary" @click="submitLogin">登录</el-button>
+    <div class="home">{{ msg }}</div>
+  </div>
 </template>
 
 <script lang="ts">
 import SoftKey3W from '../plugin/Syunew3W.js'
-import { defineComponent, ref, onMounted } from 'vue'
+import { defineComponent, ref, onMounted, reactive } from 'vue'
+import { login, loginVerify } from '@/api/test'
 import { toHex } from '../utils/utils'
+interface UserInfo {
+  passWord: string
+  userName: string
+}
 
 export default defineComponent({
   name: 'Home',
   setup() {
+    const form = reactive<UserInfo>({
+      passWord: '',
+      userName: ''
+    })
+    const submitLogin = async () => {
+      const res: any = await login(form)
+      randomNum.value = res.data.myriad
+      await startSetup()
+    }
     //设备连接状态
     const driveConnect = ref<boolean>(false)
     //设备id
     const KeyID = ref<string>('')
+    //随机数
+    const randomNum = ref<string>('')
     //加密后密钥
     const returnEncData = ref<string>('')
     //页面显示信息
@@ -30,6 +49,8 @@ export default defineComponent({
     const init = async () => {
       return new Promise((resolve, reject) => {
         //如果是IE10及以下浏览器，则跳过不处理
+        msg.value = '开始检测设备状态'
+        timer(2)
         if (navigator.userAgent.indexOf('MSIE') > 0 && navigator.userAgent.indexOf('opera') === -1) {
           msg.value = '您的浏览器不支持uKey登录'
         }
@@ -132,7 +153,7 @@ export default defineComponent({
                   return false
                 }
                 //这里返回对随机数的HASH结果
-                softKey.EncString('123456', DevicePath)
+                softKey.EncString(randomNum.value, DevicePath)
               }
               break
             case 5:
@@ -145,6 +166,10 @@ export default defineComponent({
                 }
                 returnEncData.value = UKData.return_value
                 msg.value = '123456加密之后的结果：' + returnEncData.value
+                await loginVerify({
+                  returnEncData: returnEncData.value,
+                  KeyID: KeyID.value
+                })
                 softKey.Socket_UK.close()
               }
               break
@@ -156,9 +181,6 @@ export default defineComponent({
         return false
       }
     }
-    onMounted(() => {
-      startSetup()
-    })
     return {
       init,
       startSetup,
@@ -166,9 +188,19 @@ export default defineComponent({
       timer,
       driveConnect,
       KeyID,
-      returnEncData
+      returnEncData,
+      form,
+      submitLogin,
+      randomNum
     }
   },
   methods: {}
 })
 </script>
+
+<style scoped>
+.main {
+  width: 250px;
+  margin: 100px auto;
+}
+</style>

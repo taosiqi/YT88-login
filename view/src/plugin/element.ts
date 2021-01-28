@@ -40,7 +40,7 @@ import {
   // ElHeader,
   // ElIcon,
   // ElImage,
-  // ElInput,
+  ElInput,
   // ElInputNumber,
   // ElLink,
   // ElMain,
@@ -96,7 +96,7 @@ const components = [
   // ElBadge,
   // ElBreadcrumb,
   // ElBreadcrumbItem,
-  ElButton
+  ElButton,
   // ElButtonGroup,
   // ElCalendar,
   // ElCard,
@@ -126,7 +126,7 @@ const components = [
   // ElHeader,
   // ElIcon,
   // ElImage,
-  // ElInput,
+  ElInput
   // ElInputNumber,
   // ElLink,
   // ElMain,

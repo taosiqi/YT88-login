@@ -1,22 +1,17 @@
 import { fetchPost, fetchGet, fetchDelete, fetchPut, fetchUrl } from '@/api/interceptors'
-/**获取*/
-export function getList() {
-  fetchGet(`${fetchUrl.domain}get`, {
-    name: 123
-  }).then(res => {})
+/**登录*/
+export function login(data: any) {
+  return new Promise((resolve, reject) => {
+    fetchGet(`${fetchUrl.domain}user/login`, data).then(res => {
+      resolve(res)
+    })
+  })
 }
-export function delList() {
-  fetchDelete('http://192.168.1.189:3000/delete', {
-    name: 123
-  }).then(res => {})
-}
-export function putList() {
-  fetchPut('http://192.168.1.189:3000/put', {
-    name: 123
-  }).then(res => {})
-}
-export function postList() {
-  fetchPost('http://192.168.1.189:3000/post', {
-    name: 123
-  }).then(res => {})
+/**效验key*/
+export function loginVerify(data: any) {
+  return new Promise((resolve, reject) => {
+    fetchGet(`${fetchUrl.domain}user/login/verify`, data).then(res => {
+      resolve(res)
+    })
+  })
 }
