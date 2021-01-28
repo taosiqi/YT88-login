@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
-import {projectState} from "@/config";
+import { projectState } from '@/config'
 import qs from 'qs'
 //响应时间
 axios.defaults.timeout = 5000
@@ -121,4 +121,4 @@ export function fetchDelete(url: string, params: any) {
   })
 }
 
-export const fetchUrl=projectState
+export const fetchUrl = projectState

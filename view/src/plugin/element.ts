@@ -168,13 +168,7 @@ const components = [
   // ElUpload,
 ]
 
-const plugins = [
-  ElInfiniteScroll,
-  ElLoading,
-  ElMessage,
-  ElMessageBox,
-  ElNotification
-]
+const plugins = [ElInfiniteScroll, ElLoading, ElMessage, ElMessageBox, ElNotification]
 import '../style/element-variables.scss'
 
 export default (app: any) => {
