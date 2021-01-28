@@ -169,8 +169,6 @@ const components = [
 ]
 
 const plugins = [ElInfiniteScroll, ElLoading, ElMessage, ElMessageBox, ElNotification]
-import '../style/element-variables.scss'
-
 export default (app: any) => {
   locale.use(lang)
   components.forEach(component => {

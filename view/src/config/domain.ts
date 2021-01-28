@@ -1,6 +1,6 @@
 // 开发环境
 export const devState = {
-  domain: 'http://172.18.45.113:3000/',
+  domain: 'http://192.168.31.64:3000/',
   userServer: 'http://192.168.1.189:3000/'
 }
 

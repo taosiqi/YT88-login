@@ -7,26 +7,19 @@
 
 <script lang="ts">
 import SoftKey3W from '../plugin/Syunew3W.js'
-import { defineComponent, ref, onMounted, reactive } from 'vue'
+import { defineComponent, ref, reactive } from 'vue'
 import { login, loginVerify } from '@/api/test'
 import { toHex } from '../utils/utils'
-interface UserInfo {
-  passWord: string
-  userName: string
+interface LoginData {
+  myriad: string
 }
-
 export default defineComponent({
   name: 'Home',
   setup() {
-    const form = reactive<UserInfo>({
+    const form = reactive({
       passWord: '',
       userName: ''
     })
-    const submitLogin = async () => {
-      const res: any = await login(form)
-      randomNum.value = res.data.myriad
-      await startSetup()
-    }
     //设备连接状态
     const driveConnect = ref<boolean>(false)
     //设备id
@@ -35,6 +28,15 @@ export default defineComponent({
     const randomNum = ref<string>('')
     //加密后密钥
     const returnEncData = ref<string>('')
+
+    // 登录
+    const submitLogin = async () => {
+      const res: any = await login(form)
+      console.log(res)
+      randomNum.value = res.myriad
+      await startSetup()
+    }
+
     //页面显示信息
     const msg = ref<string>('加载中')
     const timer = (second: number) => {
@@ -182,16 +184,16 @@ export default defineComponent({
       }
     }
     return {
-      init,
-      startSetup,
       msg,
-      timer,
+      randomNum,
       driveConnect,
       KeyID,
       returnEncData,
       form,
-      submitLogin,
-      randomNum
+      init,
+      startSetup,
+      timer,
+      submitLogin
     }
   },
   methods: {}
