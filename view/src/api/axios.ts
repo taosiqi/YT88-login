@@ -45,7 +45,7 @@ axios.interceptors.response.use(
 )
 
 //post
-export function fetchPost(url: string, params: any) {
+export function fetchPost(url: string, params: {}): Promise<any> {
   return new Promise((resolve, reject) => {
     axios
       .post(url, params)
@@ -63,7 +63,7 @@ export function fetchPost(url: string, params: any) {
   })
 }
 //put
-export function fetchPut(url: string, params: any) {
+export function fetchPut(url: string, params: {}): Promise<any> {
   return new Promise((resolve, reject) => {
     axios
       .put(url, params)
@@ -81,7 +81,7 @@ export function fetchPut(url: string, params: any) {
   })
 }
 //get
-export function fetchGet(url: string, params: any) {
+export function fetchGet(url: string, params: {}): Promise<any> {
   return new Promise((resolve, reject) => {
     axios
       .get(url, {
@@ -101,7 +101,7 @@ export function fetchGet(url: string, params: any) {
   })
 }
 //delete
-export function fetchDelete(url: string, params: any) {
+export function fetchDelete(url: string, params: any): Promise<any> {
   return new Promise((resolve, reject) => {
     axios
       .delete(url, {

@@ -1,18 +1,10 @@
-import { fetchPost, fetchGet, fetchDelete, fetchPut, fetchUrl } from '@/api/interceptors'
+import { fetchPost, fetchGet, fetchDelete, fetchPut, fetchUrl } from '@/api/axios'
 /**登录*/
 
-export function login(data: any) {
-  return new Promise((resolve, reject) => {
-    fetchGet(`${fetchUrl.domain}user/login`, data).then((res) => {
-      resolve(res)
-    })
-  })
+export function login(data: UserInfo): Promise<LoginData> {
+  return fetchGet(`${fetchUrl.domain}user/login`, data)
 }
 /**效验key*/
-export function loginVerify(data: any) {
-  return new Promise((resolve, reject) => {
-    fetchGet(`${fetchUrl.domain}user/login/verify`, data).then(res => {
-      resolve(res)
-    })
-  })
+export function loginVerify(data: LoginVerify): Promise<VerifyData> {
+  return fetchGet(`${fetchUrl.domain}user/login/verify`, data)
 }

@@ -10,9 +10,7 @@ import SoftKey3W from '../plugin/Syunew3W.js'
 import { defineComponent, ref, reactive } from 'vue'
 import { login, loginVerify } from '@/api/test'
 import { toHex } from '../utils/utils'
-interface LoginData {
-  myriad: string
-}
+
 export default defineComponent({
   name: 'Home',
   setup() {
@@ -21,25 +19,24 @@ export default defineComponent({
       userName: ''
     })
     //设备连接状态
-    const driveConnect = ref<boolean>(false)
+    const driveConnect = ref(false)
     //设备id
-    const KeyID = ref<string>('')
+    const KeyID = ref('')
     //随机数
-    const randomNum = ref<string>('')
+    const randomNum = ref('')
     //加密后密钥
-    const returnEncData = ref<string>('')
+    const returnEncData = ref('')
 
     // 登录
     const submitLogin = async () => {
-      const res: any = await login(form)
-      console.log(res)
-      randomNum.value = res.myriad
+      const { myriad } = await login(form)
+      randomNum.value = myriad
       await startSetup()
     }
 
     //页面显示信息
     const msg = ref<string>('加载中')
-    const timer = (second: number) => {
+    const timer = (second: number): Promise<void> => {
       return new Promise((resolve, reject) => {
         const t = setTimeout(() => {
           resolve()
@@ -52,7 +49,6 @@ export default defineComponent({
       return new Promise((resolve, reject) => {
         //如果是IE10及以下浏览器，则跳过不处理
         msg.value = '开始检测设备状态'
-        timer(2)
         if (navigator.userAgent.indexOf('MSIE') > 0 && navigator.userAgent.indexOf('opera') === -1) {
           msg.value = '您的浏览器不支持uKey登录'
         }
@@ -99,6 +95,7 @@ export default defineComponent({
               {
                 //查找第一个加密锁
                 await timer(2) //避免过程太快
+                msg.value = '查找加密锁'
                 softKey.FindPort(0)
               }
               break
@@ -140,6 +137,7 @@ export default defineComponent({
                 }
                 ID_2 = UKData.return_value //获得返回的UK的ID_2
                 msg.value = 'ID_2：' + ID_2
+                await timer(2) //避免过程太快
                 KeyID.value = toHex(ID_1) + toHex(ID_2)
                 msg.value = 'KeyID：' + KeyID.value
                 softKey.ContinueOrder()
@@ -168,10 +166,9 @@ export default defineComponent({
                 }
                 returnEncData.value = UKData.return_value
                 msg.value = '123456加密之后的结果：' + returnEncData.value
-                await loginVerify({
-                  returnEncData: returnEncData.value,
-                  KeyID: KeyID.value
-                })
+                const data = await loginVerify({ returnEncData: returnEncData.value, KeyID: KeyID.value })
+                await timer(2) //避免过程太快
+                msg.value = '和服务端对比结果：' + data.msg
                 softKey.Socket_UK.close()
               }
               break
